@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://sri-sankl.github.io/blog/2016/01/26/metaprogramming-in-ruby-implementing-class-extension-mixins/</loc>
+    <lastmod>2016-01-26T19:38:53+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://sri-sankl.github.io/blog/2014/11/29/ajax-pagination-with-angularjs-and-rails-using-will-paginate/</loc>
+    <lastmod>2014-11-29T12:59:40+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://sri-sankl.github.io/blog/2014/11/05/connecting-angularjs-resource-with-rails/</loc>
+    <lastmod>2014-11-05T21:59:12+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://sri-sankl.github.io/</loc>
+    <lastmod>2016-01-28T23:00:20+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://sri-sankl.github.io/blog/archives/</loc>
+    <lastmod>2016-01-28T23:00:20+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://sri-sankl.github.io/about/</loc>
+    <lastmod>2016-01-28T23:00:20+05:30</lastmod>
+  </url>
+</urlset>

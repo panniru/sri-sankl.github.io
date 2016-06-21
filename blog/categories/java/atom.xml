@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | Srikanth]]></title>
+  <link href="http://sri-sankl.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://sri-sankl.github.io/"/>
+  <updated>2016-06-21T23:56:19+05:30</updated>
+  <id>http://sri-sankl.github.io/</id>
+  <author>
+    <name><![CDATA[sri-sankl]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Role of Lambdas in Collections - Java 8]]></title>
+    <link href="http://sri-sankl.github.io/blog/2016/06/17/role_of_lambdas_in_collections-java-8/"/>
+    <updated>2016-06-17T21:39:06+05:30</updated>
+    <id>http://sri-sankl.github.io/blog/2016/06/17/role_of_lambdas_in_collections-java-8</id>
+    <content type="html"><![CDATA[<p>  Collections would have look different if lambdas were part of java from beginning. Lambdas are popular in functional programming and some other object oriented programming languages like Ruby.
+<br>
+It might be better to implement a new collection framework <code>collection II</code> using lambdas, but it would be a big task. Instead, java came up with a strategy of adding extension methods to existing interfaces(such as <code>Collection</code>, <code>List</code> or <code>Iterable</code>) and adding new interfaces(such as <code>Sream</code>) that are retrofitted onto existing classes.
+<br>
+  Major advantages of using lambdas in collections are
+<br>
+1. <em>Parallelism</em>
+2. <em>Lazy evaluation</em></p>
+
+<!--more-->
+
+
+<p>
+For example, An Employee class will looks like.
+<br>
+<img src="/images/EmpClass.png" alt="Employee.java" /></p>
+
+<h5>External vs Internal Iteration</h5>
+
+<p>If I want to set all the employees <code>dept</code> to <em>PROD</em>. I need to write a <code>for</code> loop to iterate over all the elements in the collection.
+<code>Java External Iteration
+        for (Employee employee : employees) {
+            employee.setDept("PROD");
+        }
+</code>
+ The Collection framework provides a way to its client to iterate over the elements through <code>iterator()</code>. The <code>for</code> loop uses the iterator and traverse sequentially through all the elements of the collection.
+<br>
+The disadvantages using this approch are
+<br>
+  1. It is inherently serial. It travels in order of which they are inserted into collection.
+<br>
+  2. There is no opportunity to mange the control flow, parellelism, short circuting or laziness to improve the performance.</p>
+
+<p> The alternative to this approach is an <em>internal iteration</em>.
+<code>Java Internal Iteration
+employees.forEach((emp) -&gt; emp.setDept("PROD"));
+</code></p>
+
+<p> Here control flow is in the hands of library. Collections provides a way to the client to interact with its internal methods. The client deligates the snippets of code to the library to excecute. So library can decide parellel processing or lazy evalution based on the given criteria. So the internal iteration helps library to process elements in the collection parelelly. The <code>forEach()</code> method may not use the parellel processing, but there is a possibility to implement parellelism by using internal iteration.
+  Internal iteration also provides a way to <em>pipeline</em> operations togather.</p>
+
+<p>For example, If I want to shift all the <em>PRDO</em> dept employees to <em>R&amp;D</em>, we could say
+<code>Java
+        employees.stream()
+            .filter(emp -&gt; emp.getDept() == "PROD")
+            .forEach(emp -&gt; emp.setDept("R&amp;D"));
+</code>
+<code>filter()</code> returns a stream of employees who are matching with the given condition to <code>forEach()</code> function.
+<br>
+If I want to find, how much the company is spending on sales dept, then we could do
+<br>
+<code>Java
+        employees.stream()
+            .filter(emp -&gt; emp.getDept() == "SALES")
+            .mapToLong(emp -&gt; emp.getSal())
+            .sum();
+</code></p>
+
+<h5>Eager vs Lazy Evaluation</h5>
+
+<p> In an eager type of evaluation, when <code>filter()</code> method gets excecuted it draws all the elements from the collection and applies the condition(Predicate) and provides a new Collection. The new collection will be used by <code>mapToLong()</code> method. In the same way <code>mapToLong()</code> method also returns a new collection. So every statement when it returns accumulates the result.</p>
+
+<p> Where as in Lazy , filtering is only done when we start iterating the elements of results of the filter method. The <code>filter()</code> method instead of reading all the elements to return the result, it draws the first element from the source and applies the predicate. The succeded element will be deligated to the next method <code>mapToLong()</code> which is also a lazy operation. Methods such as <code>filter()</code>, <code>map()</code> are <em>naturally lazy</em>. So the return type of these methods cannot be a Collection, they return again a <code>stream</code>. The tail methods such as <code>sum()</code>  or <code>forEach()</code> are eager operations. They read all elements deligated from lazy methods and returns the result. Normally tail methods are <em>naturally eager</em>.</p>
+
+<p> We can acheive a significant increase in performance by doing series of lazy operations and an eager operation such as <code>filter-map-forEach</code>(<em>lazy-lazy-eager</em>) or <code>filter-filter-mapToLong-sum</code>(<em>lazy-lazy-lazy-eager</em>).</p>
+
+<p> For example, If we are doing filtering, maping and accumulating on a collection. The lazy operations such <code>filter()</code>, <code>map()</code>, <code>sum()</code> will do in single pass of data instead of three passes.</p>
+
+<h5>Streams</h5>
+
+<p>  The <code>Stream</code> interface is fundamental interface that intended to use in variety of senarios, including the Collections API.
+<br>
+Streams differs from Collections in several ways:</p>
+
+<ol>
+<li><em>No Storage:</em> Streams dont store any data. It transforms data from source through various operations. Stream method produces a new stream these are known as <em>Intermediate Operaions</em>; those that do not are <em>terminal operations</em>
+<br></li>
+<li><em>Functional in nature:</em> In functional programming languages functions are the first class citizens and they only returns result instead of modifying the state of params. In the same way stream operations produces results but they will not modify the data.
+<br></li>
+<li><em>Laziness-seeking :</em> Many stream operation such as <code>filter()</code>, <code>map()</code> are lazy in nature. We can only traverse as many elements as we need to find the answer. For example &ldquo;find the first employee who is having Rs. 10000  salary&rdquo; not need to look up all the elements in the collection.
+<br></li>
+<li><em>Bounds optional:</em> We can draw limited no of elements from the infinite collection of data source. For example, we can only take 20 elements from the infinite array of numbers.</li>
+</ol>
+
+
+<p>All the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">stream</a> operations are not fitted in the Collections. Instead <code>stream()</code> method is added in Collections which return the <code>Stream</code> interface.
+<br>
+Stream operations can operate in either seqrial or parellel; whether stream is serial or parellel is a property of a stream source. We have <code>parallelStream()</code> method to return the parellel stream.</p>
+
+<h5>Laziness and short-circuiting</h5>
+
+<p>  If we are looking for the first employee in a dept whose salary is more than Rs.10000.
+<code>Java
+    Optional&lt;Employee&gt; firstEmp = employees.stream()
+                       .filter(emp -&gt; emp.getDept() == "SALES")
+                         .filter(emp -&gt; emp.getSal() &gt;= 10000).findFirst();
+</code>
+  Instead of iterating all the elements in the collection or source, <code>filter()</code> operation finds one for which predicate is true. The <code>findfirst()</code> methods returns <code>Optional</code>, because there may be cases where no element matching the criteria.</p>
+
+<h5>Sorting became simpler</h5>
+
+<p>   In the previous <a href="http://sri-sankl.github.io/blog/2016/06/17/advantages-of-lambdas-in-java-8/">post</a> we have seen how to simplify sorting using comparator with lambdas  <br/>
+<code>Java
+public static final Comparator&lt;Employee&gt; compareByName = (lhs, rhs) -&gt; lhs.getName().compareTo(rhs.getName());
+</code>
+Java8 provides even simpler machanism to do this</p>
+
+<p> If I have two X type objects to comapare based on a value returned by the functions of each X. On the <code>Comparator</code> class a <code>comparing</code> function is lambda it takes a function and then extracts a value out of the object and returns a <code>Comparator</code> that sorts based on that.</p>
+
+<pre><code class="Java"> public static Comparator&lt;Employee&gt; BY_NAME = Comparator.comparing(Employee::getName);
+</code></pre>
+
+<p> If I have to sort the employees by dept and then by salary. Java8 provides the method composition which is known as <em>functional composition</em>.</p>
+
+<pre><code class="Java">Collections.sort(employees, Employee.BY_DEPT.thenComparing(Employee.BY_SAL));
+</code></pre>
+
+<p> We can combine the <code>Comparator</code> instances in varios ways.
+We can also write the above statment without assigning lambdas to <code>BY_DEPT</code> or <code>BY_SAL</code> variables as.
+<code>java
+Collections.sort(employees, Comparator.comparing(Employee::getDept).thenComparing(Employee::getSal));
+</code></p>
+
+<h6>References:</h6>
+
+<ol>
+<li><a href="http://cr.openjdk.java.net/~briangoetz/lambda/lambda-libraries-final.html">http://cr.openjdk.java.net/~briangoetz/lambda/lambda-libraries-final.html</a></li>
+<li><a href="http://www.oracle.com/technetwork/articles/java/architect-lambdas-part2-2081439.html">http://www.oracle.com/technetwork/articles/java/architect-lambdas-part2-2081439.html</a></li>
+</ol>
+
+
+<blockquote><p>Thank you for reading the post. Feel free to comment.
+Happy Coding..:)</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>

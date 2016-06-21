@@ -109,7 +109,7 @@ end
 
  `attr_on_basic()` method defines a method for each `:hra`, `:city_compensatory_allowance`, `:employer_pf_contribution`, `:bonus_payment` component. These component definations will fetch their respected value percentages from  `payslip_breakups` model and it will calculate it's absolute value by using `basic` and will return the final result.
 
->Thank you for reading the post. Feel free to comment.
+>Thank you for reading this post. Feel free to comment.
 >Happy Coding..:)
 
 ######References:

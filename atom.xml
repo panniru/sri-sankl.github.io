@@ -4,7 +4,7 @@
   <title><![CDATA[Srikanth]]></title>
   <link href="http://sri-sankl.github.io/atom.xml" rel="self"/>
   <link href="http://sri-sankl.github.io/"/>
-  <updated>2016-06-21T23:56:19+05:30</updated>
+  <updated>2016-06-22T09:59:34+05:30</updated>
   <id>http://sri-sankl.github.io/</id>
   <author>
     <name><![CDATA[sri-sankl]]></name>
@@ -182,6 +182,339 @@ We can also write the above statment without assigning lambdas to <code>BY_DEPT<
 
 <blockquote><p>Thank you for reading the post. Feel free to comment.
 Happy Coding..:)</p></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Lambda Expressions in Java 8]]></title>
+    <link href="http://sri-sankl.github.io/blog/2016/05/17/lambda-expressions-in-java-8/"/>
+    <updated>2016-05-17T22:42:12+05:30</updated>
+    <id>http://sri-sankl.github.io/blog/2016/05/17/lambda-expressions-in-java-8</id>
+    <content type="html"><![CDATA[<blockquote><p>Lambda Expression is a way of writing an implamementation of a method for later execution.</p></blockquote>
+
+<p>Lambdas are also known as <em>closures</em> or <em>anonymous functions</em>.</p>
+
+<h5>Syntax:</h5>
+
+<p>  Lambda expression consists of three parts.
+  1. A paranthesized set of parameters.
+  2. An arrow
+  3. A body</p>
+
+<figure class='code'><figcaption><span>Lambda Expression</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">()</span> <span class="o">-&gt;</span> <span class="c1">//my single statement;</span>
+</span><span class='line'><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="c1">//my single statement;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<!--more-->
+
+
+<p>
+ If we have multiple statements in body part, we have to write them inside the curly braces and the last statement should return the result.</p>
+
+<figure class='code'><figcaption><span>Lambda Expression</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">//my steatement1</span>
+</span><span class='line'>  <span class="c1">//.....</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">someValue</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+<b> <em>Note:</em> </b>Lambdas can not <code>break</code> or <code>continue</code> out of the body.</p>
+
+<h5>Functional Interface:</h5>
+
+<p>  It is an interface which requires only one method to be implemented in order to satisfy the requirements of the interface.</p>
+
+<figure class='code'><figcaption><span>MySampleInteface.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MySampleInterface</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="nf">mySampleMethod</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> We can implement this interface using an anonynous class</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="n">MySampleInterface</span> <span class="n">msi</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">MySampleInterface</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="nd">@Override</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">myMethod</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          <span class="c1">// My implementation logic</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">};</span>
+</span><span class='line'> <span class="n">msi</span><span class="o">.</span><span class="na">myMethod</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> We can simplify this entire story into a single statement using lambdas.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'>     <span class="n">MySampleInterface</span> <span class="n">msi</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;I am implementing a functional interface&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="n">msi</span><span class="o">.</span><span class="na">myMethod</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  This is how the lambdas are implemented. Thre is no ambiguity around which method of the interface lambda is trying to implement.
+<br/>
+The designers of java8 also provided an annotation <code>@FunctionalInterface</code> to serve as a documentations hint that an interface is a functional interface. Its not mandatory to keep this annotation though.
+<br/>
+Java has some functional interfaces, such as <code>Runnable</code>, <code>Comparator&lt;T&gt;</code> etc.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Lambda Implemented run method&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">r</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span> <span class="n">lhs</span><span class="o">,</span> <span class="n">String</span> <span class="n">rhs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>              <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Comparing &quot;</span><span class="o">+</span><span class="n">lhs</span><span class="o">+</span> <span class="s">&quot; with &quot;</span><span class="o">+</span> <span class="n">rhs</span> <span class="o">);</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">lhs</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">rhs</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">};</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="s">&quot;Hello&quot;</span><span class="o">,</span> <span class="s">&quot;world&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Type Inference</h5>
+
+<p> Java 8 is providing enhanced type inferences. In the above example the target type is a<code>Comparator&lt;String&gt;</code>, the objects passed to the lambda should be String or its subtype.
+ In this case we can leave the <code>String</code> declaration in front of <code>lhs</code> and <code>rhs</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="o">(</span><span class="n">lhs</span><span class="o">,</span> <span class="n">rhs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>              <span class="k">return</span> <span class="n">lhs</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">rhs</span><span class="o">);</span>
+</span><span class='line'>          <span class="o">};</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="s">&quot;Hello&quot;</span><span class="o">,</span> <span class="s">&quot;world&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the first in the java world lambda reference cannot directly be assigned to the <code>Object</code> class. Since <code>Object</code> is not a functional interface. We have to cast to its target type to assign to a <code>Object</code> type reference.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="o">(</span><span class="n">Runnable</span><span class="o">)</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Hello World&quot;</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Lixical Scoping:</h5>
+
+<p> When we are working with a inner class, we need to write a special syntax to access the outer scope from the inner class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Runnable</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="nd">@Override</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Hello</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Hello</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="s">&quot;I am in Hello class&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can simplify this using lambds. Lambdas are lexically scoped. This means that they recognizes their immediate environment as the next outer most scope.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">Runnable</span> <span class="n">r</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">toString</span><span class="o">());</span>
+</span><span class='line'>  <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="s">&quot;I am in Hello class&quot;</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>this</code> no longer refers to the lambda itself. Both the above examples provides the same output.</p>
+
+<p>Lambdas can refer to it&rsquo;s immediate outer scoped local variables but these are effectively final meaning that its final in all but name.
+ It can refer but can not modify local variable <code>message</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="o">;</span>
+</span><span class='line'>      <span class="n">Runnable</span> <span class="n">r1</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">r1</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">StringBuilder</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">StringBuilder</span><span class="o">(</span><span class="s">&quot;Hello&quot;</span><span class="o">);</span>
+</span><span class='line'>  <span class="n">Runnable</span> <span class="n">r1</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">message</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">message</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&quot;World&quot;</span><span class="o">);</span>
+</span><span class='line'>          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+</span><span class='line'>  <span class="o">};</span>
+</span><span class='line'>  <span class="n">r1</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p> Here <code>final</code> modifier applied to only the reference but not on the right side object.</p>
+
+<h5>Method References:</h5>
+
+<p>Lambdas not only difined at the point of usage. We can also define lambdas for later use.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>      <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareByFirstName</span> <span class="o">=</span> <span class="o">(</span><span class="n">lhs</span><span class="o">,</span> <span class="n">rhs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">lhs</span><span class="o">.</span><span class="na">firstName</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">rhs</span><span class="o">.</span><span class="na">firstName</span><span class="o">);</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareByLasteName</span> <span class="o">=</span> <span class="o">(</span><span class="n">lhs</span><span class="o">,</span> <span class="n">rhs</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">lhs</span><span class="o">.</span><span class="na">lastName</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">rhs</span><span class="o">.</span><span class="na">lastName</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="s">&quot;FirstName: &quot;</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">persons</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Sri&quot;</span><span class="o">,</span> <span class="s">&quot;Sankl&quot;</span><span class="o">,</span> <span class="mi">22</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Nani&quot;</span><span class="o">,</span> <span class="s">&quot;Hero&quot;</span><span class="o">,</span> <span class="mi">26</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Rehman&quot;</span><span class="o">,</span> <span class="s">&quot;A.R&quot;</span><span class="o">,</span> <span class="mi">26</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">persons</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nf">Person</span><span class="o">(</span><span class="s">&quot;Bahubali&quot;</span><span class="o">,</span> <span class="s">&quot;Rajamouli&quot;</span><span class="o">,</span> <span class="mi">21</span><span class="o">));</span>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">persons</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">persons</span><span class="o">,</span> <span class="n">Person</span><span class="o">.</span><span class="na">compareByFirstName</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">persons</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Comparator <code>compareByFirstName</code> is defined as a static final field and it can be referenced as any other static field could be referenced.</p>
+
+<blockquote><p>Thank you for reading the post. Feel free to comment.
+Happy Coding..:)</p></blockquote>
+
+<h6>References:</h6>
+
+<ol>
+<li><a href="http://www.oracle.com/technetwork/articles/java/architect-lambdas-part1-2080972.html">http://www.oracle.com/technetwork/articles/java/architect-lambdas-part1-2080972.html</a></li>
+</ol>
+
 ]]></content>
   </entry>
   
